@@ -661,8 +661,8 @@
             <div class="repo-icon"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/></svg></div>
             <span class="lang-pill">Java</span>
           </div>
-          <h3><a href="https://github.com/AgroV2/Index_Device">Index Device</a></h3>
-          <p>Приложение основанное на вселенной Project Moon, выдающее предписания (задания) указательного.</p>
+          <h3><a href="https://github.com/AgroV2/Index_Device">AgroLauncher</a></h3>
+          <p>Быстрый и кастомизируемый лаунчер Minecraft с поддержкой Rust версии, кастомизацией, настраиваемостью и инстансами, игра только без лицензии</p>
           <div class="project-tags"><span>JavaFX</span></div>
         </article>
         <article class="project-card reveal" style="--rd: 0.08s;">
@@ -725,8 +725,6 @@
     </section>
   </div>
 </main>
-
-<!-- ==================== CUBE SURVIVORS ==================== -->
 <div class="cg-overlay" id="cg-overlay" role="dialog" aria-modal="true" aria-label="Мини-игра Cube Survivors" aria-hidden="true">
   <canvas id="cg-canvas"></canvas>
 
@@ -749,7 +747,6 @@
   <button class="cg-icon-btn cg-x" id="cg-close" type="button" aria-label="Закрыть игру">✕</button>
   <button class="cg-icon-btn cg-m" id="cg-mute" type="button" aria-label="Включить или выключить звук">♪</button>
 
-  <!-- Старт -->
   <div class="cg-screen" id="cg-start">
     <div class="cg-panel">
       <div class="cg-eyebrow">Секретный уровень портфолио</div>
@@ -776,7 +773,6 @@
     </div>
   </div>
 
-  <!-- Магазин улучшений -->
   <div class="cg-screen" id="cg-shop" hidden>
     <div class="cg-panel">
       <div class="cg-shop-head">
@@ -807,8 +803,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Смерть / победа -->
   <div class="cg-screen" id="cg-dead" hidden>
     <div class="cg-panel narrow">
       <div class="cg-eyebrow" id="cg-dead-eyebrow">Забег окончен</div>
@@ -969,7 +963,7 @@ window.addEventListener("resize", function () {
 
 
 
-var screenName = "start";      // start | playing | shop | paused | dead
+var screenName = "start";      
 var runActive = false;
 var endless = false;
 var uid = 1;
@@ -983,9 +977,9 @@ var P = {
   shieldT: 0
 };
 
-var S = {};                    // текущие статы (пересчитываются)
-var owned = {};                // id -> уровень
-var actives = [];              // до 3 слотов: { id, lvl, t, cd }
+var S = {};                  
+var owned = {};               
+var actives = [];             
 var enemies = [], pbul = [], ebul = [], mats = [], parts = [], texts = [], fx = [], mines = [], turrets = [];
 var wave = 1, waveTime = 0, waveDur = 20, bossAlive = false, pendingEnd = 0;
 var spawnT = 0, level = 1, xp = 0, xpNeed = 10, matCount = 0, kills = 0, runTime = 0;
@@ -1169,7 +1163,7 @@ var RAR_NAME = { common: "обычное", rare: "редкое", epic: "эпич
 var RAR_COLOR = { common: "#8b98a5", rare: "#4d9dff", epic: "#a371f7", leg: "#e3b341" };
 var RAR_CLASS = { common: "r-common", rare: "r-rare", epic: "r-epic", leg: "r-leg" };
 
-/* ========== 3. СУЩНОСТИ: частицы, снаряды, игрок, урон ========== */
+
 
 var MAX_PARTS = REDUCED ? 60 : 420;
 
@@ -1199,8 +1193,6 @@ function banner(main, sub, color) {
   ui.banner.classList.add("show");
   bannerT = 1.9;
 }
-
-/* ---------- снаряды игрока ---------- */
 function shoot(x, y, ang, dmgMul, sizeMul, src) {
   var dmg = S.damage * (dmgMul || 1);
   var crit = chance(S.crit);
@@ -1240,7 +1232,6 @@ function playerShoot(dt) {
   snd(rnd(620, 700), 0.05, "square", 0.16, 380);
 }
 
-/* ---------- урон врагу ---------- */
 function hurtEnemy(e, dmg, crit, showText) {
   e.hp -= dmg;
   e.flash = 0.09;
@@ -1278,7 +1269,6 @@ function killEnemy(e) {
   }
 }
 
-/* ---------- урон игроку ---------- */
 function heal(v, showText) {
   if (P.hp >= P.maxHp) return;
   P.hp = Math.min(P.maxHp, P.hp + v);
@@ -1307,7 +1297,6 @@ function hurtPlayer(dmg, srcX, srcY) {
   if (P.hp <= 0) { P.hp = 0; gameOver(false); }
 }
 
-/* ---------- опыт и уровни ---------- */
 function xpNeedFor(l) { return Math.round(8 + l * 4.5 + Math.pow(l, 1.7)); }
 
 function gainXp(v) {
@@ -1323,8 +1312,6 @@ function gainXp(v) {
     snd(760, 0.12, "triangle", 0.3, 1180);
   }
 }
-
-/* ========== 4. ВРАГИ И ВОЛНЫ ========== */
 
 var EDEF = {
   runner:   { s: 21, hp: 15,  sp: 112, dmg: 6,  mat: 1, col: "#e5484d", w: 1.0,  from: 1 },
@@ -1465,7 +1452,6 @@ function endWave() {
   openShop();
 }
 
-/* ========== 5. ОБНОВЛЕНИЕ МИРА ========== */
 
 var keys = {};
 var tstick = { on: false, id: null, ox: 0, oy: 0, dx: 0, dy: 0 };
@@ -1557,7 +1543,7 @@ function updateEnemies(dt) {
       e.y += uy * sp * dt;
     }
 
-    // отбрасывание
+   
     if (e.kx || e.ky) {
       e.x += e.kx * dt; e.y += e.ky * dt;
       e.kx *= 0.86; e.ky *= 0.86;
@@ -1568,7 +1554,6 @@ function updateEnemies(dt) {
     e.y = clamp(e.y, 12, ARENA.h - 12);
     e.rot += e.vr * dt;
 
-    // контактный урон
     if (e.touch > 0) e.touch -= dt;
     var half = (e.s + P.s) / 2;
     if (Math.abs(e.x - P.x) < half && Math.abs(e.y - P.y) < half) {
@@ -1773,7 +1758,7 @@ function updateParticles(dt) {
   }
 }
 
-/* ---------- активные предметы ---------- */
+
 function useActive(i) {
   var slot = actives[i];
   if (!slot || slot.t > 0 || screenName !== "playing") return;
@@ -1818,7 +1803,6 @@ function useActive(i) {
   }
 }
 
-/* ========== 6. ОТРИСОВКА ========== */
 
 function cube(x, y, s, color, rot, alpha) {
   var h = s / 2;
@@ -1886,7 +1870,6 @@ function drawPlayer() {
   }
   cubeIn(P.x, P.y, P.s, C.pl, C.plIn, 0);
   ctx.restore();
-  // ствол
   ctx.save();
   ctx.translate(P.x, P.y);
   ctx.rotate(P.aim);
@@ -1953,15 +1936,14 @@ function render() {
   drawGrid();
 
   var i;
-  // кубиты опыта
+
   for (i = 0; i < mats.length; i++) cube(mats[i].x, mats[i].y, 9, C.mat, mats[i].rot);
-  // мины
+
   for (i = 0; i < mines.length; i++) {
     var m = mines[i];
     var on = m.arm > 0 ? true : (Math.floor(m.blink * 5) % 2 === 0);
     cube(m.x, m.y, 20, on ? C.mine : "#8a3f16", 0.78);
   }
-  // волны/взрывы
   for (i = 0; i < fx.length; i++) {
     var f = fx[i];
     ctx.save();
@@ -1982,21 +1964,21 @@ function render() {
     ctx.strokeRect(t.x - 15, t.y - 15, 30, 30);
     ctx.restore();
   }
-  // частицы
+
   for (i = 0; i < parts.length; i++) {
     var p = parts[i];
     cube(p.x, p.y, p.s, p.c, p.rot, clamp(p.life / p.max, 0, 1));
   }
-  // враги
+
   for (i = 0; i < enemies.length; i++) drawEnemy(enemies[i]);
-  // снаряды врагов
+
   for (i = 0; i < ebul.length; i++) {
     var eb = ebul[i];
     cubeIn(eb.x, eb.y, eb.s, C.ebul, C.ebulIn, eb.rot);
   }
-  // игрок
+
   drawPlayer();
-  // снаряды игрока
+
   for (i = 0; i < pbul.length; i++) {
     var b = pbul[i];
     if (b.crit) {
@@ -2008,7 +1990,7 @@ function render() {
       cubeIn(b.x, b.y, b.s, C.bul, C.bulIn, b.rot);
     }
   }
-  // всплывающий текст
+
   ctx.textAlign = "center";
   for (i = 0; i < texts.length; i++) {
     var tx = texts[i];
@@ -2021,7 +2003,6 @@ function render() {
   }
   ctx.restore();
 
-  // указатели на врагов за экраном (только боссы)
   for (i = 0; i < enemies.length; i++) {
     var e = enemies[i];
     if (!e.boss) continue;
@@ -2032,7 +2013,7 @@ function render() {
   }
 }
 
-/* ========== 7. HUD, МАГАЗИН УЛУЧШЕНИЙ, ЭКРАНЫ ========== */
+
 
 var hudCache = { hp: -1, mhp: -1, lvl: -1, mats: -1, wave: -1, kills: -1, timer: "" };
 var slotEls = [], tactEls = [];
@@ -2213,7 +2194,7 @@ function openShop() {
   showScreen(ui.shop);
 }
 
-/* ---------- экраны ---------- */
+
 function showScreen(el) {
   [ui.start, ui.shop, ui.pause, ui.dead].forEach(function (s) { s.hidden = s !== el; });
   ui.hud.classList.toggle("hide", el === ui.start);
@@ -2285,7 +2266,7 @@ function newRun() {
   startWave(1);
 }
 
-/* ========== 8. ВВОД, ЦИКЛ, ЖИЗНЕННЫЙ ЦИКЛ ОВЕРЛЕЯ ========== */
+
 
 var KEYMAP = {
   KeyW: "w", KeyA: "a", KeyS: "s", KeyD: "d",
@@ -2306,7 +2287,6 @@ window.addEventListener("keydown", function (ev) {
     if (screenName === "playing") pauseGame();
     else if (screenName === "paused") resumeGame();
     else if (screenName === "start" || screenName === "dead") closeGame();
-    // на экране улучшений Esc игнорируем: сначала нужно взять карточки
     return;
   }
   if (k === "m") { A.on = !A.on; syncMute(); return; }
@@ -2327,7 +2307,7 @@ window.addEventListener("keyup", function (ev) {
   if (k) keys[k] = 0;
 });
 
-/* ---------- тач-стик ---------- */
+
 canvas.addEventListener("touchstart", function (ev) {
   if (screenName !== "playing") return;
   var t = ev.changedTouches[0];
@@ -2368,7 +2348,7 @@ function endTouch(ev) {
 canvas.addEventListener("touchend", endTouch);
 canvas.addEventListener("touchcancel", endTouch);
 
-/* ---------- цикл ---------- */
+
 var STEP = 1 / 60;
 var acc = 0, last = 0, raf = 0;
 
@@ -2413,7 +2393,6 @@ function stopLoop() {
   raf = 0;
 }
 
-/* ---------- открытие / закрытие ---------- */
 var scrollY = 0;
 
 function openGame() {
@@ -2431,7 +2410,7 @@ function openGame() {
     showScreen(ui.start);
     setTimeout(function () { ui.startBtn.focus(); }, 30);
   } else if (screenName === "shop") {
-    showScreen(ui.shop);                       // возвращаем незакрытый выбор улучшений
+    showScreen(ui.shop);                   
     setTimeout(function () { ui.go.focus(); }, 30);
   } else if (screenName === "dead") {
     showScreen(ui.dead);
@@ -2485,7 +2464,7 @@ window.addEventListener("blur", function () {
   if (isOpen() && screenName === "playing") pauseGame();
 });
 
-/* фокус-ловушка внутри оверлея */
+
 overlay.addEventListener("keydown", function (ev) {
   if (ev.key !== "Tab") return;
   var f = overlay.querySelectorAll("button:not([disabled]):not([hidden])");
@@ -2499,7 +2478,6 @@ overlay.addEventListener("keydown", function (ev) {
   else if (!ev.shiftKey && document.activeElement === lastEl) { ev.preventDefault(); first.focus(); }
 });
 
-/* стартовая инициализация */
 S = baseStats();
 recalc();
 resize();
